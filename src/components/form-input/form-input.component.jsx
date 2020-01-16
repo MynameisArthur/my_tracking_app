@@ -2,9 +2,7 @@ import React from 'react';
 import './form-input.styles.sass';
 
 const FormInput = ({ handleChange, label, ...otherProps }) => {
-    console.log('other props',otherProps);
     return (
-    
     <div className='group'>
       <input className='form-input' onChange={handleChange} {...otherProps} />
       {label ? (

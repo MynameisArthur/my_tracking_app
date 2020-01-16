@@ -4,10 +4,9 @@ import CustomButton from '../custom-button/custom-button.component';
 import {auth,createUserProfileDocument} from '../../firebase/firebase.utils';
 import './sign-up.styles.sass';
 
-class SignUp extends React.Component {
+class SignUp extends Component {
     constructor() {
-      super();
-  
+      super();  
       this.state = {
         displayName: '',
         email: '',
@@ -30,10 +29,8 @@ class SignUp extends React.Component {
         const { user } = await auth.createUserWithEmailAndPassword(
           email,
           password
-        );
-  
-        await createUserProfileDocument(user, { displayName });
-  
+        );  
+        await createUserProfileDocument(user, { displayName });  
         this.setState({
           displayName: '',
           email: '',
@@ -46,8 +43,7 @@ class SignUp extends React.Component {
     };
   
     handleChange = event => {
-      const { name, value } = event.target;
-  
+      const { name, value } = event.target;  
       this.setState({ [name]: value });
     };
   
