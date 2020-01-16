@@ -65,5 +65,16 @@ const TRACKER_DATA = [
             {date:'14-01-2020',id:'r4'},
         ]
     },
+    {
+        id:7,
+        title: 'Money',
+        routeName: 'money',
+        days:[
+            {date:'11-01-2020',id:'m1'},
+            {date:'12-01-2020',id:'m2'},
+            {date:'13-01-2020',id:'m3'},
+            {date:'14-01-2020',id:'m4'},
+        ]
+    },
 ];
 export default TRACKER_DATA;

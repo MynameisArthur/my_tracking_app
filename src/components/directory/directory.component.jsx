@@ -44,6 +44,12 @@ class DirectoryComponent extends Component {
                     id: 6,
                     linkUrl: 'relax'
                 },
+                {
+                    title: 'money',
+                    imageUrl: './assets/money.jpg',
+                    id: 7,
+                    linkUrl: 'money'
+                },
             ]
         };
     }
