@@ -4,9 +4,10 @@ import {Link} from 'react-router-dom';
 import {auth} from '../../firebase/firebase.utils';
 import {connect} from 'react-redux';
 import TrackerButton from '../tracker-icon/tracker-icon.component';
+import TrackerDropdown from '../tracker-dropdown/tracker-dropdown.component';
 
 
-const Header = ({currentUser}) =>{
+const Header = ({currentUser,hidden}) =>{
     return (
         <div className="header">
             <Link to="/" className="logo-container"><h1 className="logo">T</h1></Link>
@@ -23,15 +24,20 @@ const Header = ({currentUser}) =>{
                     :
                     <Link className="option" to="/signin">SIGN IN</Link>
                 }
-                <TrackerButton />
+                <TrackerButton />               
             </div>
+            {
+                hidden ? null : (<TrackerDropdown />)
+
+            }
         </div>
     )
 };
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = ({user: {currentUser},tracker: {hidden}})=>{
     return{
-        currentUser: state.user.currentUser
+        currentUser,
+        hidden
     };
 }
 
