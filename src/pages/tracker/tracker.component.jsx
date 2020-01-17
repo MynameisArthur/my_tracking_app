@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TRACKER_DATA from './tracker.data';
-import CategoryPreview from '../../components/preview-category/category-preview.component';
+import CategoryPreview from '../../components/category-preview/category-preview.component';
 
 class TrackerPage extends Component {
     constructor()

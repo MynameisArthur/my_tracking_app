@@ -3,6 +3,8 @@ import './header.styles.sass';
 import {Link} from 'react-router-dom';
 import {auth} from '../../firebase/firebase.utils';
 import {connect} from 'react-redux';
+import TrackerButton from '../tracker-icon/tracker-icon.component';
+
 
 const Header = ({currentUser}) =>{
     return (
@@ -21,6 +23,7 @@ const Header = ({currentUser}) =>{
                     :
                     <Link className="option" to="/signin">SIGN IN</Link>
                 }
+                <TrackerButton />
             </div>
         </div>
     )
