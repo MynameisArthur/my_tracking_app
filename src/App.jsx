@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import HomePage from './pages/homepage/homepage.component';
 import {Switch,Route,Redirect} from 'react-router-dom';
 import TrackerPage from './pages/tracker/tracker.component';
+import TrackerList from './pages/tracker-list/tracker-list.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import {auth,createUserProfileDocument} from './firebase/firebase.utils';
@@ -42,6 +43,7 @@ class App extends Component {
       <Switch>
         <Route exact path='/' component={HomePage} />        
         <Route path='/tracker' component={TrackerPage} />
+        <Route path='/tracker_list' component={TrackerList} />
         <Route exact path='/signin' render={()=>this.props.currentUser ? (<Redirect to="/" />) : (<SignInAndSignUpPage />)} />
       </Switch>
       </div>
