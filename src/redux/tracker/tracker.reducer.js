@@ -1,6 +1,7 @@
 import TrackerActionTypes from './tracker.types';
 const INITIAL_STATE = {
-    hidden: true
+    hidden: true,
+    trackerItems: []
 };
 
 const trackerReducer = (state=INITIAL_STATE,action)=>{
@@ -10,6 +11,11 @@ const trackerReducer = (state=INITIAL_STATE,action)=>{
             return{
                 ...state,
                 hidden: !state.hidden
+            };
+        case TrackerActionTypes.ADD_ITEM:
+            return {
+                ...state,
+                trackerItems: [...state.trackerItems,action.payload]
             };
         default:
             return state;

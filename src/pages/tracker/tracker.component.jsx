@@ -7,7 +7,7 @@ class TrackerPage extends Component {
     {
         super();
         this.state = {
-            categories : TRACKER_DATA
+            categories : TRACKER_DATA,            
         };
     }
     render() {

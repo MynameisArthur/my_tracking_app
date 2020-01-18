@@ -12,7 +12,7 @@ class SignIn extends Component {
         this.state = {
             email: '',
             password: ''
-        }
+        };
     }
     handleSubmit = async (e)=>{
         e.preventDefault();

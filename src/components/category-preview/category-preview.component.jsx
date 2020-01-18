@@ -1,19 +1,14 @@
 import React from 'react';
 import './category-preview.styles.sass';
-import CategoryItem from '../category-item/category-item.component';
+import AddItem from '../add-item/add-item.component';
 
-const CategoryPreview = ({title,days})=> {
+
+const CategoryPreview = ({title})=> {
     return (
         <div className="category-preview">
             <h1 className="title">{title.toUpperCase()}</h1>
-            <div className="preview">
-                {
-                    days
-                    .filter((day,index)=> index < 4)
-                    .map(({id,...itemProps})=>(
-                        <CategoryItem key={id} {...itemProps} />
-                    ))
-                }
+            <div className="preview">                
+                <AddItem category={title.toLowerCase()}/>
             </div>
         </div>
     )
