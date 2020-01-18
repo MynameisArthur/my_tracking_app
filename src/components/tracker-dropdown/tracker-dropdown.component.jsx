@@ -3,6 +3,7 @@ import CustomButton from '../custom-button/custom-button.component';
 import './tracker-dropdown.styles.sass';
 import TrackItem from '../track-item/track-item.component';
 import {connect} from 'react-redux';
+import {selectTrackerItems} from '../../redux/tracker/tracker.selectors';
 
 const TrackerDropdown =({trackerItems})=> {
     return (
@@ -17,9 +18,9 @@ const TrackerDropdown =({trackerItems})=> {
     )
 };
 
-const mapStateToProps = ({tracker: {trackerItems}})=>{
+const mapStateToProps = (state)=>{
     return{
-        trackerItems
+        trackerItems: selectTrackerItems(state)
     };
 };
 
