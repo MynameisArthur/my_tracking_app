@@ -4,6 +4,7 @@ import {ReactComponent as TrackerIcon} from '../../assets/map.svg';
 import {connect} from 'react-redux';
 import {toggleTrackerHidden} from '../../redux/tracker/tracker.actions';
 import { selectTrackerItems } from '../../redux/tracker/tracker.selectors';
+import {createStructuredSelector} from 'reselect';
 
 const TrackerButton = ({toggleTrackerHidden})=>{
     return(
@@ -13,11 +14,9 @@ const TrackerButton = ({toggleTrackerHidden})=>{
     );
 };
 
-const mapStateToProps = (state)=>{
-    return {
-        trackerItems: selectTrackerItems(state)
-    };
-};
+const mapStateToProps = createStructuredSelector({  
+    trackerItems: selectTrackerItems
+});
 
 const mapDispatchToProps = (dispatch)=>{
     return {

@@ -5,3 +5,7 @@ export const selectTrackerItems = createSelector(
     [selectTracker],
     (tracker)=> tracker.trackerItems
 );
+export const selectTrackerHidden = createSelector(
+    [selectTracker],    
+    tracker => tracker.hidden
+);

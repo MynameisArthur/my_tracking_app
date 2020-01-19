@@ -5,6 +5,9 @@ import {auth} from '../../firebase/firebase.utils';
 import {connect} from 'react-redux';
 import TrackerButton from '../tracker-icon/tracker-icon.component';
 import TrackerDropdown from '../tracker-dropdown/tracker-dropdown.component';
+import {createStructuredSelector} from 'reselect';
+import {selectTrackerHidden} from '../../redux/tracker/tracker.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 
 const Header = ({currentUser,hidden}) =>{
@@ -37,11 +40,9 @@ const Header = ({currentUser,hidden}) =>{
     )
 };
 
-const mapStateToProps = ({user: {currentUser},tracker: {hidden}})=>{
-    return{
-        currentUser,
-        hidden
-    };
-}
+const mapStateToProps = createStructuredSelector({    
+        currentUser: selectCurrentUser,
+        hidden: selectTrackerHidden  
+});
 
 export default connect(mapStateToProps)(Header);
