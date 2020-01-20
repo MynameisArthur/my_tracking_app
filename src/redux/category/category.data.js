@@ -1,4 +1,4 @@
-const TRACKER_DATA = [
+const CATEGORIES_DATA = [
     {
         id:1,
         title: 'Food',
@@ -35,4 +35,4 @@ const TRACKER_DATA = [
         routeName: 'money',
     },
 ];
-export default TRACKER_DATA;
+export default CATEGORIES_DATA;
