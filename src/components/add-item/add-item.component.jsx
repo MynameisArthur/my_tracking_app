@@ -22,7 +22,7 @@ class AddItem extends Component {
                 category: this.state.category,
                 item: e.target.elements[0].value,
                 description: e.target.elements[1].value,
-                date: new Date()
+                date: (new Date()).getTime()
             });
            this.setState({
                item: '',

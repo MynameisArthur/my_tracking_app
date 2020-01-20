@@ -16,6 +16,13 @@ const trackerReducer = (state=INITIAL_STATE,action)=>{
             return {
                 ...state,
                 trackerItems: [...state.trackerItems,action.payload]
+                
+                
+            };
+        case TrackerActionTypes.CLEAR_ITEM_FROM_LIST:
+            return {
+                ...state,
+                trackerItems: state.trackerItems.filter(trackerItem=>trackerItem.date!==action.payload.date)
             };
         default:
             return state;
