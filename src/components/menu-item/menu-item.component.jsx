@@ -6,7 +6,7 @@ const  MenuItem = ({title,imageUrl,history,linkUrl,match}) => {
     return (
     <div 
         className="menu-item" 
-        onClick={()=>history.push(`${match.url}${linkUrl}`)}
+        onClick={()=>history.push(`tracker${match.url}${linkUrl}`)}
         >
         <div style={{backgroundImage: `url(${imageUrl})`}}  className="background-image"></div>
         <div className="content">

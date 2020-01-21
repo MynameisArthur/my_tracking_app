@@ -42,6 +42,12 @@ const INITIAL_STATE = {
             id: 7,
             linkUrl: 'money'
         },
+        {
+            title: 'other',
+            imageUrl: './images/other.jpg',
+            id: 8,
+            linkUrl: 'other'
+        },
     ]
 };
 

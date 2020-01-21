@@ -9,3 +9,7 @@ export const selectTrackerHidden = createSelector(
     [selectTracker],    
     tracker => tracker.hidden
 );
+export const selectItemInCategory = categoryUrlParam => createSelector(
+    [selectTracker],
+    items => items.trackerItems.filter(item=>item.category === categoryUrlParam)
+);

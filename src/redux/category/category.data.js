@@ -34,5 +34,10 @@ const CATEGORIES_DATA = [
         title: 'Money',
         routeName: 'money',
     },
+    {
+        id:8,
+        title: 'Other',
+        routeName: 'other',
+    },
 ];
 export default CATEGORIES_DATA;

@@ -1,24 +1,17 @@
 import React from 'react';
-import CategoryPreview from '../../components/category-preview/category-preview.component';
-import {connect} from 'react-redux';
-import {selectCategories} from '../../redux/category/category.selectors';
-import {createStructuredSelector} from 'reselect';
+import CategoriesOverview from '../../components/categories-overview/categories-overview.component';
+import {Route} from 'react-router-dom';
+import CategoryPage from '../category/category.component';
 
-const TrackerPage = ({categories})=> {
+const TrackerPage = ({match})=> {
     return (
-        <div className="category-page">
-            {
-                categories.map(({id,...otherCategoryProps})=>(
-                    <CategoryPreview key={id} {...otherCategoryProps}/>
-                ))
-             }
+        <div className="tracker-page">
+            <Route exact path={`${match.path}`} component={CategoriesOverview} />
+            <Route path={`${match.path}/:categoryId`} component={CategoryPage}/>
         </div>
     );
 };
 
-const mapStateToProps = createStructuredSelector({
-    categories: selectCategories
-});
 
-export default connect(mapStateToProps)(TrackerPage);
+export default TrackerPage;
 
