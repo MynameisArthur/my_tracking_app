@@ -3,7 +3,7 @@ import './categories-overview.styles.sass';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import CategoryPreview from '../category-preview/category-preview.component';
-import {selectCategories} from '../../redux/category/category.selectors';
+import {selectCategoriesForPreview} from '../../redux/category/category.selectors';
 
 
 const CategoriesOverview = ({categories})=>{
@@ -19,7 +19,7 @@ const CategoriesOverview = ({categories})=>{
 };
 
 const mapStateToProps = createStructuredSelector({
-    categories: selectCategories
+    categories: selectCategoriesForPreview
 });
 
 

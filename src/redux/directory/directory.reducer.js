@@ -4,49 +4,49 @@ const INITIAL_STATE = {
             title: 'food',
             imageUrl: './images/food.jpg',
             id: 1,
-            linkUrl: 'food'
+            linkUrl: 'tracker/food'
         },
         {
             title: 'workout',
             imageUrl: './images/workout.jpg',
             id: 2,
-            linkUrl: 'workout'
+            linkUrl: 'tracker/workout'
         },
         {
             title: 'code',
             imageUrl: './images/code.jpg',
             id: 3,
-            linkUrl: 'code'
+            linkUrl: 'tracker/code'
         },
         {
             title: 'communication',
             imageUrl: './images/communication.jpg',
             id: 4,
-            linkUrl: 'communication'
+            linkUrl: 'tracker/communication'
         },
         {
             title: 'knowledge',
             imageUrl: './images/knowledge.jpg',
             id: 5,
-            linkUrl: 'knowledge'
+            linkUrl: 'tracker/knowledge'
         },
         {
             title: 'relax',
             imageUrl: './images/relax.jpg',
             id: 6,
-            linkUrl: 'relax'
+            linkUrl: 'tracker/relax'
         },
         {
             title: 'money',
             imageUrl: './images/money.jpg',
             id: 7,
-            linkUrl: 'money'
+            linkUrl: 'tracker/money'
         },
         {
             title: 'other',
             imageUrl: './images/other.jpg',
             id: 8,
-            linkUrl: 'other'
+            linkUrl: 'tracker/other'
         },
     ]
 };
