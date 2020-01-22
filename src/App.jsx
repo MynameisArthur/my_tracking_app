@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 import {setCurrentUser} from './redux/user/user.actions';
 import {selectCurrentUser} from './redux/user/user.selectors';
 import {createStructuredSelector} from 'reselect';
-
+import {selectCategoriesForPreview} from './redux/category/category.selectors';
 
 class App extends Component { 
   unsubscribeFromAuth = null;
@@ -28,9 +28,7 @@ class App extends Component {
             });          
         });
       }
-      else{
-        setCurrentUser(userAuth);
-      }
+      setCurrentUser(userAuth);
     });
 
   }
@@ -54,7 +52,8 @@ class App extends Component {
   }
 }
 const mapStateToProps = createStructuredSelector({  
-    currentUser: selectCurrentUser
+    currentUser: selectCurrentUser,
+    categoriesArray: selectCategoriesForPreview
 });
 
 const mapDispatchToProps = (dispatch)=>{

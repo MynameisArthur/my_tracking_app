@@ -24,7 +24,7 @@ const CATEGORIES_DATA = {
         title: 'Knowledge',
         routeName: 'knowledge',
     },
-    knowledge:{
+    relax:{
         id:6,
         title: 'Relax',
         routeName: 'relax',
