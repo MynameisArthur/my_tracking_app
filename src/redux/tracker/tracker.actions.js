@@ -10,6 +10,7 @@ export const addItem = item=>{
     };
 };
 export const clearItemFromList = item =>{
+    
     return{
         type: TrackerActionTypes.CLEAR_ITEM_FROM_LIST,
         payload: item

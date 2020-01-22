@@ -4,7 +4,7 @@ import CustomButton from '../custom-button/custom-button.component';
 import './add-item.styles.sass';
 import {connect} from 'react-redux';
 import {addItem} from '../../redux/tracker/tracker.actions';
-import {auth,createTrackerDocument} from '../../firebase/firebase.utils';
+import {createTrackerDocument} from '../../firebase/firebase.utils';
 class AddItem extends Component {
     constructor(props)
     {
@@ -64,7 +64,7 @@ class AddItem extends Component {
 }
 const mapStateToProps = ({user:{currentUser}})=>({
    currentUser
-})
+});
 const mapDispatchToProps = (dispatch)=>{
     return {
         addItem: item => dispatch(addItem(item))

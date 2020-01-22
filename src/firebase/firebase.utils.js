@@ -16,7 +16,7 @@ const config = {
   export const createUserProfileDocument = async (userAuth,additionalData)=>{
     if(!userAuth) return;
     const userRef = firestore.doc(`users/${userAuth.uid}`);
-    const snapShot = await userRef.get();
+    const snapShot = await userRef.get(); 
     if(!snapShot.exists)
     {
       const {displayName,email} = userAuth;
@@ -49,6 +49,23 @@ const config = {
       } 
     return trackerRef;
   };
+  export const removeTrackerDocument = async (uid,date)=>{
+    if(!uid) return;
+    const trackerRef = await firestore.collection('trackers');  
+    const data = await trackerRef.where('date','==',date).get();  
+    const docId = data.docs[0].id;  
+      try{
+        await trackerRef.doc(docId).delete();
+        console.log(`tracker removed`);
+      }
+      catch(error)
+      {
+        console.log('error creating user',error.message);        
+      } 
+    return trackerRef;
+  }
+
+
 
   firebase.initializeApp(config);
 
