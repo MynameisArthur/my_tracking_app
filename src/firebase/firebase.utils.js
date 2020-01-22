@@ -45,23 +45,30 @@ const config = {
       }
       catch(error)
       {
-        console.log('error creating user',error.message);        
+        console.log('error adding tracker',error.message);        
       } 
     return trackerRef;
   };
   export const removeTrackerDocument = async (uid,date)=>{
     if(!uid) return;
     const trackerRef = await firestore.collection('trackers');  
-    const data = await trackerRef.where('date','==',date).get();  
-    const docId = data.docs[0].id;  
-      try{
-        await trackerRef.doc(docId).delete();
-        console.log(`tracker removed`);
-      }
-      catch(error)
+    const data = await trackerRef.where('date','==',date).where('userId','==',uid).get();
+      if(data && data.docs[0])
       {
-        console.log('error creating user',error.message);        
-      } 
+        const docId = data.docs[0].id;  
+          try{
+            await trackerRef.doc(docId).delete();
+            console.log(`tracker removed`);
+          }
+          catch(error)
+          {
+            console.log('error removing tracker',error.message);        
+          } 
+      }
+      else{
+        alert('You can\'t remove this tracker!');
+        return console.error('You can\'t remove this tracker!');
+      }
     return trackerRef;
   }
 

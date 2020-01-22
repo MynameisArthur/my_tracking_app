@@ -19,8 +19,11 @@ const TrackerListItem = ({trackerItem,clearItem,currentUser})=>{
                 onClick={
                     async()=>{
                     const uid = await currentUser.id;                
-                    removeTrackerDocument(uid,date);
-                    clearItem(trackerItem);
+                    const removed = await removeTrackerDocument(uid,date);
+                    if(removed)
+                    {
+                        clearItem(trackerItem);
+                    }
                 }
             }
             >&#10005;</span>
