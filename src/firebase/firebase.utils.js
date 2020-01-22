@@ -36,6 +36,19 @@ const config = {
     }
     return userRef;    
   };
+  export const createTrackerDocument = async (uid,objectItem)=>{
+    if(!uid) return;
+    const trackerRef = firestore.collection(`trackers`);    
+      try{
+        await trackerRef.doc().set({userId: uid,...objectItem});
+        console.log('New tracker Added',objectItem);
+      }
+      catch(error)
+      {
+        console.log('error creating user',error.message);        
+      } 
+    return trackerRef;
+  };
 
   firebase.initializeApp(config);
 

@@ -4,30 +4,33 @@ import CustomButton from '../custom-button/custom-button.component';
 import './add-item.styles.sass';
 import {connect} from 'react-redux';
 import {addItem} from '../../redux/tracker/tracker.actions';
-
+import {auth,createTrackerDocument} from '../../firebase/firebase.utils';
 class AddItem extends Component {
     constructor(props)
     {
         super(props);
         this.state = {
-            category: this.props.category,
+            category: this.props.category,                  
             item: '',
             description: ''
         }
     }
     handleSubmit = async (e)=>{
-        e.preventDefault();                 
+        e.preventDefault(); 
+        const newItem =  {
+            category: this.state.category,
+            item: e.target.elements[0].value,
+            description: e.target.elements[1].value,
+            date: (new Date()).getTime()
+        };               
         try{
-            this.props.addItem({
-                category: this.state.category,
-                item: e.target.elements[0].value,
-                description: e.target.elements[1].value,
-                date: (new Date()).getTime()
-            });
-           this.setState({
-               item: '',
-               description: ''
-           });           
+            this.props.addItem(newItem);
+            const uid = await this.props.currentUser.id;
+            createTrackerDocument(uid,newItem);
+            this.setState({
+                item: '',
+                description: ''
+            });           
         }catch(error){
             return console.log(error);            
         }
@@ -59,10 +62,13 @@ class AddItem extends Component {
         );
     }
 }
+const mapStateToProps = ({user:{currentUser}})=>({
+   currentUser
+})
 const mapDispatchToProps = (dispatch)=>{
     return {
         addItem: item => dispatch(addItem(item))
     }
 }
 
-export default connect(null,mapDispatchToProps)(AddItem);
+export default connect(mapStateToProps,mapDispatchToProps)(AddItem);
