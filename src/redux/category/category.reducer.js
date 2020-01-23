@@ -1,16 +1,13 @@
-import CATEGORIES_DATA from './category.data';
-
-import CategoriesActionTypes from './category.types';
-import {updateCategories} from './category.actions';
+import CategoryActionTypes from './category.types';
 
 const INITIAL_STATE = {
-    categoryItems: CATEGORIES_DATA
+    categories: null
 };
 
 const categoryReducer = (state=INITIAL_STATE,action)=>{
     switch(action.type)
     {
-        case CategoriesActionTypes.UPDATE_CATEGORIES:
+        case CategoryActionTypes.UPDATE_CATEGORIES:
             return {
                 ...state,
                 categories: action.payload

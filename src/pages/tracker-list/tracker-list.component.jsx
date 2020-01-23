@@ -1,26 +1,11 @@
-import React,{Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import './tracker-list.styles.sass';
 import {createStructuredSelector} from 'reselect';
 import {selectTrackerItems} from '../../redux/tracker/tracker.selectors';
 import TrackerListItem from '../../components/tracker-list-item/tracker-list-item.component';
-import {firestore,convertCategoriesSnapshotToMap} from '../../firebase/firebase.utils';
-import {updateCategories} from '../../redux/category/category.actions';
 
-class TrackerList extends Component {
-    unsubscribeFromSnapshot = null;
-    componentDidMount()
-    {
-        const {updateCategories} = this.props;
-        const categoriesRef = firestore.collection('categories');
-        this.unsubscribeFromSnapshot = categoriesRef.onSnapshot(async snapshot=>{
-            const categoriesMap = convertCategoriesSnapshotToMap(snapshot);
-            updateCategories(categoriesMap);            
-        });
-    }
-    render()
-    {
-        const {trackerItems} = this.props;
+const TrackerList = ({trackerItems})=> {
         return (
             <div className="tracker-list">
                 <div className="tracker-header">
@@ -39,13 +24,9 @@ class TrackerList extends Component {
                 }       
             </div>
         );
-    }
 };
 const mapStateToProps = createStructuredSelector({
     trackerItems: selectTrackerItems
 });
-const mapDispatchToProps = dispatch=>({
-    updateCategories : categoriesMap => dispatch(updateCategories(categoriesMap))
-});
 
-export default connect(mapStateToProps,mapDispatchToProps)(TrackerList);
+export default connect(mapStateToProps)(TrackerList);

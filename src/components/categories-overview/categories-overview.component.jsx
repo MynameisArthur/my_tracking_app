@@ -1,28 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './categories-overview.styles.sass';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import CategoryPreview from '../category-preview/category-preview.component';
 import {selectCategoriesForPreview} from '../../redux/category/category.selectors';
+import {updateCategories} from '../../redux/category/category.actions';
+import {firestore,convertCategoriesSnapshotToMap} from '../../firebase/firebase.utils';
 
 
-const CategoriesOverview = ({categories})=>{
-    return (
-        <div className="categories-overview">
-            {
-             categories.map(({id,...otherCategoryProps})=>(
-                    <CategoryPreview key={id} {...otherCategoryProps}/>
-                ))
-            }
-        </div>
-    );
+class CategoriesOverview extends Component{
+    unsubscribeFromSnapshot = null;
+    componentDidMount()
+    {
+        const {updateCategories} = this.props;
+        const categoriesRef = firestore.collection('categories');
+        this.unsubscribeFromSnapshot = categoriesRef.onSnapshot(async snapshot=>{
+            const categoriesMap = convertCategoriesSnapshotToMap(snapshot);
+            updateCategories(categoriesMap);            
+        });
+    }
+    render()
+    {
+       const {categories} = this.props;
+        return (
+            <div className="categories-overview">
+                {
+                 categories.map(({id,...otherCategoryProps})=>(
+                      <CategoryPreview key={id} {...otherCategoryProps}/>
+                    ))
+                }
+            </div>
+        );
+    }
 };
 
 const mapStateToProps = createStructuredSelector({
-    categories: selectCategoriesForPreview
+    categories:selectCategoriesForPreview
+});
+const mapDispatchToProps = dispatch=>({
+    updateCategories : categoriesMap => dispatch(updateCategories(categoriesMap))
 });
 
-
-export default connect(mapStateToProps)(CategoriesOverview);
+export default connect(mapStateToProps,mapDispatchToProps)(CategoriesOverview);
 
 

@@ -1,12 +1,12 @@
 import {createSelector} from 'reselect';
 
 const selectCategory = state => {
-    return state.categories;
+    return state.categories.categories;
 };
 
 export const selectCategoriesForPreview = createSelector(
-    [selectCategory],
-    categories => Object.keys(categories.categoryItems).map(key=>categories.categoryItems[key])
+    [selectCategory],    
+    categories => categories ? Object.keys(categories).map(key=>categories[key]) : []
 );
 
 export const selectCategories = createSelector(
