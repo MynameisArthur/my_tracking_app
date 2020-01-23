@@ -72,10 +72,23 @@ const config = {
     return trackerRef;
   }
 
-
-
   firebase.initializeApp(config);
 
+  export const convertCategoriesSnapshotToMap = (categories)=>{
+    const transformedCategories = categories.docs.map(doc=>{
+      const {title} = doc.data();
+      return {
+        title,
+        routeName: encodeURI(title.toLowerCase()),
+        id: doc.id
+      };
+    });
+   return transformedCategories.reduce((accumulator,category)=>{
+     accumulator[category.title.toLowerCase()] = category;
+     return accumulator;
+   },{});
+    
+  };
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
 
