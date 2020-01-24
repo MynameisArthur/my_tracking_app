@@ -8,15 +8,15 @@ import {updateCategories} from '../../redux/category/category.actions';
 import {firestore,convertCategoriesSnapshotToMap} from '../../firebase/firebase.utils';
 
 
-class CategoriesOverview extends Component{
-    unsubscribeFromSnapshot = null;
+class CategoriesOverview extends Component{  
     componentDidMount()
     {
         const {updateCategories} = this.props;
-        const categoriesRef = firestore.collection('categories');
-        this.unsubscribeFromSnapshot = categoriesRef.onSnapshot(async snapshot=>{
+        const categoriesRef = firestore.collection('categories'); 
+        categoriesRef.get().then(snapshot=>{
             const categoriesMap = convertCategoriesSnapshotToMap(snapshot);
-            updateCategories(categoriesMap);            
+            updateCategories(categoriesMap);   
+            this.setState({loading: false});
         });
     }
     render()

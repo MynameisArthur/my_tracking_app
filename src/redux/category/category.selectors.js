@@ -11,6 +11,6 @@ export const selectCategoriesForPreview = createSelector(
 
 export const selectCategories = createSelector(
     [selectCategory],
-    categories => categories.categoryItems
+    categories => categories ? categories.categoryItems : null
 );
 

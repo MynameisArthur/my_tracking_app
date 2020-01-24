@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './tracker-list.styles.sass';
 import {createStructuredSelector} from 'reselect';
 import {selectTrackerItems} from '../../redux/tracker/tracker.selectors';
 import TrackerListItem from '../../components/tracker-list-item/tracker-list-item.component';
 
-const TrackerList = ({trackerItems})=> {
+class TrackerList extends Component {
+    render()
+    {
+        const {trackerItems} = this.props;
         return (
             <div className="tracker-list">
                 <div className="tracker-header">
@@ -24,6 +27,7 @@ const TrackerList = ({trackerItems})=> {
                 }       
             </div>
         );
+    }
 };
 const mapStateToProps = createStructuredSelector({
     trackerItems: selectTrackerItems
