@@ -4,7 +4,8 @@ const INITIAL_STATE = {
     isFetching: false,
     trackerItems: [],
     errorMessage: undefined,
-    addedTracker: false
+    addedTracker: false,
+    removedTracker: false
 };
 
 const trackerReducer = (state=INITIAL_STATE,action)=>{
@@ -43,6 +44,16 @@ const trackerReducer = (state=INITIAL_STATE,action)=>{
                 addedTracker: action.payload
             };
         case TrackerActionTypes.ADD_ITEM_FAILURE:
+            return {
+                ...state,
+                errorMessage: action.payload
+            };
+        case TrackerActionTypes.CLEAR_ITEM_FROM_LIST_SUCCESS:
+            return{
+                ...state,
+                removedTracker: action.payload
+            };
+        case TrackerActionTypes.CLEAR_ITEM_FROM_LIST_FAILURE:
             return {
                 ...state,
                 errorMessage: action.payload

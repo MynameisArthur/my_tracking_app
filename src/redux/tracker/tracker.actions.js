@@ -1,5 +1,5 @@
 import TrackerActionTypes from './tracker.types';
-import {firestore,trackersList,createTrackerDocument} from '../../firebase/firebase.utils';
+import {firestore,trackersList,createTrackerDocument,removeTrackerDocument} from '../../firebase/firebase.utils';
 
 export const toggleTrackerHidden = ()=>({
     type: TrackerActionTypes.TOGGLE_TRACKER_HIDDEN
@@ -26,12 +26,29 @@ export const addItemAsync = (item,uid)=>{
         }
     };
 };
-export const clearItemFromList = item =>{    
+export const clearItemFromListSuccess = () =>{    
     return{
-        type: TrackerActionTypes.CLEAR_ITEM_FROM_LIST,
-        payload: item
+        type: TrackerActionTypes.CLEAR_ITEM_FROM_LIST_SUCCESS,
+        payload: true
     };
 };
+export const clearItemFromListFailure = error =>{    
+    return{
+        type: TrackerActionTypes.CLEAR_ITEM_FROM_LIST_FAILURE,
+        payload: error
+    };
+};
+export const clearItemFromListAsync = (date,uid) =>{
+    return async dispatch=>{
+        try{ 
+            await removeTrackerDocument(uid,date);                      
+            await dispatch(clearItemFromListSuccess());
+            dispatch(fetchTrackersStartAsync());
+        }catch(error){
+            dispatch(clearItemFromListFailure(error));
+        }
+    };
+}
 export const fetchTrackersStart = ()=>{
     return {
         payload: TrackerActionTypes.FETCH_TRACKERS_START
