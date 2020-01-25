@@ -26,6 +26,7 @@ const config = {
           displayName,
           email,
           createdAt,
+          isAdmin: false,
           ...additionalData
         });
       }
@@ -49,10 +50,18 @@ const config = {
       } 
     return trackerRef;
   };
-  export const removeTrackerDocument = async (uid,date)=>{
-    if(!uid) return;
-    const trackerRef = await firestore.collection('trackers');  
-    const data = await trackerRef.where('date','==',date).where('userId','==',uid).get();
+  export const removeTrackerDocument = async (user,date)=>{
+    if(!user.id) return;
+    const trackerRef = await firestore.collection('trackers'); 
+    let data;
+    if(user.isAdmin)
+    {
+      data = await trackerRef.where('date','==',date).get();
+    }
+    else
+    {
+      data = await trackerRef.where('date','==',date).where('userId','==',user.id).get();
+    }
       if(data && data.docs[0])
       {
         const docId = data.docs[0].id;  

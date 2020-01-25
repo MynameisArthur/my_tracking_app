@@ -16,7 +16,7 @@ const TrackerListItem = ({trackerItem,clearItem,currentUser})=>{
             <span className="description">{description}</span>
             <span 
                 className="remove-button" 
-                onClick={()=>clearItem(date,currentUser.id)}
+                onClick={()=>clearItem(date,currentUser)}
             >&#10005;</span>
         </div>
     );
@@ -26,7 +26,7 @@ const mapStateToProps = ({user:{currentUser}})=>({
     currentUser
  });
 const mapDispatchToProps = dispatch =>({
-    clearItem : (date,uid) => dispatch(clearItemFromListAsync(date,uid))
+    clearItem : (date,user) => dispatch(clearItemFromListAsync(date,user))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(TrackerListItem);

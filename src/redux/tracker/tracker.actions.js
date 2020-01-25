@@ -38,10 +38,10 @@ export const clearItemFromListFailure = error =>{
         payload: error
     };
 };
-export const clearItemFromListAsync = (date,uid) =>{
+export const clearItemFromListAsync = (date,user) =>{
     return async dispatch=>{
         try{ 
-            await removeTrackerDocument(uid,date);                      
+            await removeTrackerDocument(user,date);                      
             await dispatch(clearItemFromListSuccess());
             dispatch(fetchTrackersStartAsync());
         }catch(error){
