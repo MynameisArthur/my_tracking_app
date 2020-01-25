@@ -86,9 +86,22 @@ const config = {
    return transformedCategories.reduce((accumulator,category)=>{
      accumulator[category.title.toLowerCase()] = category;
      return accumulator;
-   },{});
-    
+   },{});    
   };
+  export const trackersList = (trackers)=>{
+    return trackers.docs.map(doc=>{
+      const {item,description,date,category,userId} = doc.data();
+      return {
+        item,
+        description,
+        date,
+        category,
+        userId,
+        routeName: encodeURI(category),
+        id:doc.id
+      };
+    });
+  }
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
 

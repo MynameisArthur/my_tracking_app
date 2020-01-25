@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './tracker-list.styles.sass';
 import {createStructuredSelector} from 'reselect';
-import {selectTrackerItems} from '../../redux/tracker/tracker.selectors';
+import {selectTrackerItems,selectTrackersIsFetching} from '../../redux/tracker/tracker.selectors';
 import TrackerListItem from '../../components/tracker-list-item/tracker-list-item.component';
+import {fetchTrackersStartAsync} from '../../redux/tracker/tracker.actions';
 
 class TrackerList extends Component {
+    componentDidMount()
+    {
+        const {fetchTrackersStartAsync} = this.props;
+        fetchTrackersStartAsync();
+    }
     render()
     {
         const {trackerItems} = this.props;
@@ -30,7 +36,12 @@ class TrackerList extends Component {
     }
 };
 const mapStateToProps = createStructuredSelector({
-    trackerItems: selectTrackerItems
+    trackerItems: selectTrackerItems,
+    isTrackersFetching: selectTrackersIsFetching
+});
+const mapDispatchToProps = dispatch=>({
+    fetchTrackersStartAsync: ()=> dispatch(fetchTrackersStartAsync())
 });
 
-export default connect(mapStateToProps)(TrackerList);
+
+export default connect(mapStateToProps,mapDispatchToProps)(TrackerList);

@@ -3,8 +3,8 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import './add-item.styles.sass';
 import {connect} from 'react-redux';
-import {addItem} from '../../redux/tracker/tracker.actions';
-import {createTrackerDocument} from '../../firebase/firebase.utils';
+import {addItemAsync} from '../../redux/tracker/tracker.actions';
+
 class AddItem extends Component {
     constructor(props)
     {
@@ -17,23 +17,18 @@ class AddItem extends Component {
     }
     handleSubmit = async (e)=>{
         e.preventDefault(); 
+        const {addItem,currentUser} = this.props;        
         const newItem =  {
             category: this.state.category,
             item: e.target.elements[0].value,
             description: e.target.elements[1].value,
             date: (new Date()).getTime()
-        };               
-        try{
-            this.props.addItem(newItem);
-            const uid = await this.props.currentUser.id;
-            createTrackerDocument(uid,newItem);
-            this.setState({
-                item: '',
-                description: ''
-            });           
-        }catch(error){
-            return console.log(error);            
-        }
+        };   
+        await addItem(newItem,currentUser.id);
+        this.setState({
+            item: '',
+            description: ''
+        }); 
     }
     handleChange = (e)=>{        
         const {name,value} = e.target;
@@ -67,8 +62,8 @@ const mapStateToProps = ({user:{currentUser}})=>({
 });
 const mapDispatchToProps = (dispatch)=>{
     return {
-        addItem: item => dispatch(addItem(item))
-    }
+        addItem: (item,uid) => dispatch(addItemAsync(item,uid))
+    };
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(AddItem);
