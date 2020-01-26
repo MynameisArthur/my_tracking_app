@@ -1,37 +1,38 @@
 import React, { Component } from 'react';
 import './categories-overview.styles.sass';
-import {connect} from 'react-redux';
-import {createStructuredSelector} from 'reselect';
 import CategoryPreview from '../category-preview/category-preview.component';
-import {selectCategoriesForPreview,selectIsCategoriesFetching} from '../../redux/category/category.selectors';
-import {fetchCategoriesStartAsync} from '../../redux/category/category.actions';
 
 
 class CategoriesOverview extends Component{  
     state ={
-        currentCategory: 'Food'
-    }
-    componentDidMount()
-    {
-        const {fetchCategoriesStartAsync} = this.props;
-        fetchCategoriesStartAsync();  
-    }
+        currentCategory: 'Food',
+        categoryList: [
+            'Code',
+            'Communication',
+            'Food',
+            'Knowledge',
+            'Money',
+            'Other',
+            'Relax',
+            'Workout'
+        ]
+    }    
     changeCategory = (title)=>{
         this.setState({currentCategory:title});
     }
     render()
     {
-       const {categories} = this.props;
+       const {categoryList} = this.state;
         return (
             <div className="categories-overview">
                 <div className="categories-switch">
                     {
-                        categories.map(category=>(
+                        categoryList.map(category=>(
                         <span 
-                            key={category.title}
-                            className={category.title === this.state.currentCategory ? 'active':''}
-                            onClick={()=>this.changeCategory(category.title)}
-                            >{category.title}</span>
+                            key={category}
+                            className={category === this.state.currentCategory ? 'active':''}
+                            onClick={()=>this.changeCategory(category)}
+                            >{category}</span>
                         ))
                     }
                 </div>
@@ -44,14 +45,7 @@ class CategoriesOverview extends Component{
     }
 };
 
-const mapStateToProps = createStructuredSelector({
-    categories:selectCategoriesForPreview,
-    isCategoriesFetching: selectIsCategoriesFetching
-});
-const mapDispatchToProps = dispatch=>({
-    fetchCategoriesStartAsync: ()=> dispatch(fetchCategoriesStartAsync())
-});
 
-export default connect(mapStateToProps,mapDispatchToProps)(CategoriesOverview);
+export default CategoriesOverview;
 
 

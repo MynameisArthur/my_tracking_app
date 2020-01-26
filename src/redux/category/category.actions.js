@@ -15,7 +15,7 @@ export const fetchCategoriesFailure = errorMessage =>({
     type: CategoryActionTypes.FETCH_CATEGORIES_FAILURE,
     payload: errorMessage
 });
-export const fetchCategoriesStartAsync = ()=>{
+export const fetchCategoriesStartAsync = ()=>{          
     return dispatch =>{       
         const categoriesRef = firestore.collection('categories'); 
         dispatch(fetchCategoriesStart);
