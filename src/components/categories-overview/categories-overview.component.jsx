@@ -8,21 +8,37 @@ import {fetchCategoriesStartAsync} from '../../redux/category/category.actions';
 
 
 class CategoriesOverview extends Component{  
+    state ={
+        currentCategory: 'Food'
+    }
     componentDidMount()
     {
         const {fetchCategoriesStartAsync} = this.props;
         fetchCategoriesStartAsync();  
+    }
+    changeCategory = (title)=>{
+        this.setState({currentCategory:title});
     }
     render()
     {
        const {categories} = this.props;
         return (
             <div className="categories-overview">
-                {
-                    categories.map(({id,...otherCategoryProps})=>(
-                      <CategoryPreview key={id} {...otherCategoryProps}/>
-                    ))
-                }
+                <div className="categories-switch">
+                    {
+                        categories.map(category=>(
+                        <span 
+                            key={category.title}
+                            className={category.title === this.state.currentCategory ? 'active':''}
+                            onClick={()=>this.changeCategory(category.title)}
+                            >{category.title}</span>
+                        ))
+                    }
+                </div>
+                <CategoryPreview 
+                    title={this.state.currentCategory} 
+                    category={this.state.currentCategory.toLowerCase()}
+                />
             </div>
         );
     }

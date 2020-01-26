@@ -9,8 +9,7 @@ class AddItem extends Component {
     constructor(props)
     {
         super(props);
-        this.state = {
-            category: this.props.category,                  
+        this.state = {                             
             item: '',
             description: ''
         }
@@ -19,7 +18,7 @@ class AddItem extends Component {
         e.preventDefault(); 
         const {addItem,currentUser} = this.props;        
         const newItem =  {
-            category: this.state.category,
+            category: this.props.category,
             item: e.target.elements[0].value,
             description: e.target.elements[1].value,
             date: (new Date()).getTime()

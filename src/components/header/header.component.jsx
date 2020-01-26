@@ -16,7 +16,7 @@ const Header = ({currentUser,hidden}) =>{
             <Link to="/" className="logo-container"><h1 className="logo">T</h1></Link>
             <div className="options">
                 <Link to="/tracker" className="option">
-                    TRACKER
+                    ADD TRACKER
                 </Link>
                 <Link to="/contact" className="option">
                     CONTACT

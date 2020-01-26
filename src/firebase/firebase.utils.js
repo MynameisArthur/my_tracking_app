@@ -109,7 +109,7 @@ const config = {
         routeName: encodeURI(category),
         id:doc.id
       };
-    });
+    }).sort((a,b)=>a.date>b.date);
   }
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();

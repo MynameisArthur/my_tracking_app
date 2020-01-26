@@ -70,7 +70,7 @@ export const fetchTrackersStartAsync = ()=>{
     return dispatch=>{
         const trackersRef = firestore.collection('trackers');
         dispatch(fetchTrackersStart);
-        trackersRef.get()
+        trackersRef.orderBy('date','desc').get()
         .then(snapshot=>{            
             const trackersMap = trackersList(snapshot);            
             dispatch(fetchTrackersSuccess(trackersMap));

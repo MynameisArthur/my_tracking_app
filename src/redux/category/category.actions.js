@@ -19,7 +19,7 @@ export const fetchCategoriesStartAsync = ()=>{
     return dispatch =>{       
         const categoriesRef = firestore.collection('categories'); 
         dispatch(fetchCategoriesStart);
-        categoriesRef.get()
+        categoriesRef.orderBy('title','asc').get()
         .then(snapshot=>{                  
             const categoriesMap = convertCategoriesSnapshotToMap(snapshot);
             dispatch(fetchCategoriesSuccess(categoriesMap));            
