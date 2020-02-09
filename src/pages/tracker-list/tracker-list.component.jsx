@@ -4,17 +4,19 @@ import './tracker-list.styles.sass';
 import {createStructuredSelector} from 'reselect';
 import {selectTrackerItems,selectTrackersIsFetching} from '../../redux/tracker/tracker.selectors';
 import TrackerListItem from '../../components/tracker-list-item/tracker-list-item.component';
-import {fetchTrackersStartAsync} from '../../redux/tracker/tracker.actions';
+import {fetchTrackersListStart} from '../../redux/tracker/tracker.actions';
 
-class TrackerList extends Component {
+
+class TrackerList extends Component {    
     componentDidMount()
     {
-        const {fetchTrackersStartAsync} = this.props;
-        fetchTrackersStartAsync();
+        const {fetchTrackersListStart} = this.props;
+        fetchTrackersListStart();
+        this.setState({loading: false})
     }
     render()
     {
-        const {trackerItems} = this.props;
+        const {trackerItems} = this.props;       
         return (
             <div className="tracker-list">
                 <div className="tracker-header">
@@ -26,9 +28,7 @@ class TrackerList extends Component {
                 </div>
                 {
                     trackerItems && trackerItems.map((trackerItem,index)=>{
-                        return(
-                            <TrackerListItem key={trackerItem.item+index} trackerItem={trackerItem}/>
-                        );
+                        return(<TrackerListItem key={trackerItem.item+index} trackerItem={trackerItem}/>);
                     })
                 }       
             </div>
@@ -40,7 +40,7 @@ const mapStateToProps = createStructuredSelector({
     isTrackersFetching: selectTrackersIsFetching
 });
 const mapDispatchToProps = dispatch=>({
-    fetchTrackersStartAsync: ()=> dispatch(fetchTrackersStartAsync())
+    fetchTrackersListStart: ()=> dispatch(fetchTrackersListStart())
 });
 
 

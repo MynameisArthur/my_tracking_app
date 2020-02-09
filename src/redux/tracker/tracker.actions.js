@@ -49,9 +49,9 @@ export const clearItemFromListAsync = (date,user) =>{
         }
     };
 }
-export const fetchTrackersStart = ()=>{
+export const fetchTrackersListStart = ()=>{
     return {
-        payload: TrackerActionTypes.FETCH_TRACKERS_START
+        type: TrackerActionTypes.FETCH_TRACKERS_START
     };
 };
 export const fetchTrackersSuccess = (trackers)=>{
@@ -69,7 +69,7 @@ export const fetchTrackersFailure = (errorMessage)=>{
 export const fetchTrackersStartAsync = ()=>{
     return dispatch=>{
         const trackersRef = firestore.collection('trackers');
-        dispatch(fetchTrackersStart);
+        dispatch(fetchTrackersListStart);
         trackersRef.orderBy('date','desc').get()
         .then(snapshot=>{            
             const trackersMap = trackersList(snapshot);            
