@@ -26,6 +26,11 @@ export const addItemAsync = (item,uid)=>{
         }
     };
 };
+export const clearItemFromListStart = ()=>{
+    return{
+        type: TrackerActionTypes.CLEAR_ITEM_FROM_LIST_START
+    };
+}
 export const clearItemFromListSuccess = () =>{    
     return{
         type: TrackerActionTypes.CLEAR_ITEM_FROM_LIST_SUCCESS,
