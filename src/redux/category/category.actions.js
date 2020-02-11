@@ -1,6 +1,4 @@
 import CategoryActionTypes from './category.types';
-import {firestore,convertCategoriesSnapshotToMap} from '../../firebase/firebase.utils';
-
 
 export const fetchCategoriesStart = () => {
     return {
@@ -15,15 +13,3 @@ export const fetchCategoriesFailure = errorMessage =>({
     type: CategoryActionTypes.FETCH_CATEGORIES_FAILURE,
     payload: errorMessage
 });
-export const fetchCategoriesStartAsync = ()=>{          
-    return dispatch =>{       
-        const categoriesRef = firestore.collection('categories'); 
-        dispatch(fetchCategoriesStart);
-        categoriesRef.orderBy('title','asc').get()
-        .then(snapshot=>{                  
-            const categoriesMap = convertCategoriesSnapshotToMap(snapshot);
-            dispatch(fetchCategoriesSuccess(categoriesMap));            
-        })
-        .catch(error=>dispatch(fetchCategoriesFailure(error.message)));
-    };
-};

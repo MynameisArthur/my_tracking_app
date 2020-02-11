@@ -1,11 +1,11 @@
 import React from 'react';
 import './tracker-list-item.style.sass';
 import {connect} from 'react-redux';
-import {clearItemFromListAsync} from '../../redux/tracker/tracker.actions';
 import {formatTime} from '../../redux/tracker/tracker.utils';
+import {clearItemFromListStart} from '../../redux/tracker/tracker.actions'
 
 
-const TrackerListItem = ({trackerItem,clearItem,currentUser})=>{
+const TrackerListItem = ({trackerItem,clearItem})=>{
     const {item,date,category,description} = trackerItem;
     const formatedTime = formatTime(new Date(date))
     return (
@@ -16,8 +16,8 @@ const TrackerListItem = ({trackerItem,clearItem,currentUser})=>{
             <span className="description">{description}</span>
             <span 
                 className="remove-button" 
-                onClick={()=>clearItem(date,currentUser)}
-            >&#10005;</span>
+                onClick={()=>clearItem(date)}                
+                >&#10005;</span>
         </div>
     );
 };
@@ -26,7 +26,7 @@ const mapStateToProps = ({user:{currentUser}})=>({
     currentUser
  });
 const mapDispatchToProps = dispatch =>({
-    clearItem : (date,user) => dispatch(clearItemFromListAsync(date,user))
+    clearItem: (date)=>dispatch(clearItemFromListStart(date))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(TrackerListItem);

@@ -3,7 +3,7 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import './add-item.styles.sass';
 import {connect} from 'react-redux';
-import {addItemAsync} from '../../redux/tracker/tracker.actions';
+import {addItemStart} from '../../redux/tracker/tracker.actions';
 
 class AddItem extends Component {
     constructor(props)
@@ -16,14 +16,14 @@ class AddItem extends Component {
     }
     handleSubmit = async (e)=>{
         e.preventDefault(); 
-        const {addItem,currentUser} = this.props;        
+        const {addItem} = this.props;        
         const newItem =  {
             category: this.props.category,
             item: e.target.elements[0].value,
             description: e.target.elements[1].value,
             date: (new Date()).getTime()
         };   
-        await addItem(newItem,currentUser.id);
+        addItem(newItem);
         this.setState({
             item: '',
             description: ''
@@ -59,10 +59,8 @@ class AddItem extends Component {
 const mapStateToProps = ({user:{currentUser}})=>({
    currentUser
 });
-const mapDispatchToProps = (dispatch)=>{
-    return {
-        addItem: (item,uid) => dispatch(addItemAsync(item,uid))
-    };
-}
+const mapDispatchToProps = (dispatch)=>({    
+    addItem: (item) => dispatch(addItemStart(item))    
+});
 
 export default connect(mapStateToProps,mapDispatchToProps)(AddItem);

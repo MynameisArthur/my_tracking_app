@@ -12,6 +12,14 @@ const config = {
     appId: "1:139330362117:web:45a9c5b2c83b0231f3f56c",
     measurementId: "G-6YNS1BS4SM"
   };
+  export const getCurrentUser = ()=>{
+    return new Promise((resolve,reject)=>{
+      const unsubscribe = auth.onAuthStateChanged(userAuth=>{
+        unsubscribe();
+        resolve(userAuth);
+      },reject);
+    });
+  };
 
   export const createUserProfileDocument = async (userAuth,additionalData)=>{
     if(!userAuth) return;
@@ -37,12 +45,11 @@ const config = {
     }
     return userRef;    
   };
-  export const createTrackerDocument = async (uid,objectItem)=>{
+  export const createTrackerDocument = async ({uid,objectItem:{payload}})=>{   
     if(!uid) return;
     const trackerRef = firestore.collection(`trackers`);    
       try{
-        await trackerRef.doc().set({userId: uid,...objectItem});
-        console.log('New tracker Added',objectItem);
+        await trackerRef.doc().set({userId: uid,...payload});       
       }
       catch(error)
       {
@@ -50,18 +57,10 @@ const config = {
       } 
     return trackerRef;
   };
-  export const removeTrackerDocument = async (user,date)=>{
+  export const removeTrackerDocument = async ({payload,user})=>{
     if(!user.id) return;
-    const trackerRef = await firestore.collection('trackers'); 
-    let data;
-    if(user.isAdmin)
-    {
-      data = await trackerRef.where('date','==',date).get();
-    }
-    else
-    {
-      data = await trackerRef.where('date','==',date).where('userId','==',user.id).get();
-    }
+    const trackerRef = await firestore.collection('trackers');
+    let data = await trackerRef.where('date','==',payload).where('userId','==',user.id).get();
       if(data && data.docs[0])
       {
         const docId = data.docs[0].id;  
@@ -112,14 +111,7 @@ const config = {
     }).sort((a,b)=>a.date>b.date);
   };
 
-  export const getCurrentUser = ()=>{
-    return new Promise((resolve,reject)=>{
-      const unsubscribe = auth.onAuthStateChanged(userAuth=>{
-        unsubscribe();
-        resolve(userAuth);
-      },reject);
-    });
-  };
+  
 
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();

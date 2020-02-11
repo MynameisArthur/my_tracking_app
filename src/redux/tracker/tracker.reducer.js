@@ -15,11 +15,16 @@ const trackerReducer = (state=INITIAL_STATE,action)=>{
             return{
                 ...state,
                 hidden: !state.hidden
-            };        
-        case TrackerActionTypes.CLEAR_ITEM_FROM_LIST:
+            };
+        case TrackerActionTypes.CLEAR_ITEM_FROM_LIST_FAILURE:
             return {
                 ...state,
-                trackerItems: state.trackerItems.filter(trackerItem=>trackerItem.date!==action.payload.date)
+                errorMessage: action.payload
+            };          
+        case TrackerActionTypes.CLEAR_ITEM_FROM_LIST_SUCCESS:             
+            return {
+                ...state,
+                trackerItems: state.trackerItems.filter(trackerItem=>trackerItem.date!==action.payload)
             };
         case TrackerActionTypes.FETCH_TRACKERS_START:
             return {
@@ -47,17 +52,7 @@ const trackerReducer = (state=INITIAL_STATE,action)=>{
             return {
                 ...state,
                 errorMessage: action.payload
-            };
-        case TrackerActionTypes.CLEAR_ITEM_FROM_LIST_SUCCESS:
-            return{
-                ...state,
-                removedTracker: action.payload
-            };
-        case TrackerActionTypes.CLEAR_ITEM_FROM_LIST_FAILURE:
-            return {
-                ...state,
-                errorMessage: action.payload
-            };
+            };       
         default:
             return state;
     }

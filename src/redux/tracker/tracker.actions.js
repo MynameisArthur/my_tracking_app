@@ -1,5 +1,5 @@
 import TrackerActionTypes from './tracker.types';
-import {firestore,trackersList,createTrackerDocument,removeTrackerDocument} from '../../firebase/firebase.utils';
+import {firestore,trackersList} from '../../firebase/firebase.utils';
 
 export const toggleTrackerHidden = ()=>({
     type: TrackerActionTypes.TOGGLE_TRACKER_HIDDEN
@@ -16,25 +16,20 @@ export const addItemFailure = error=>{
         payload: error
     };
 };
-export const addItemAsync = (item,uid)=>{
-    return async dispatch=>{
-        try{ 
-            await createTrackerDocument(uid,item);                      
-            dispatch(addItemSuccess());
-        }catch(error){
-            dispatch(addItemFailure(error));
-        }
-    };
-};
-export const clearItemFromListStart = ()=>{
+export const addItemStart = (itemObject)=>({
+    type: TrackerActionTypes.ADD_ITEM_START,
+    payload: itemObject
+});
+export const clearItemFromListStart = (date)=>{
     return{
-        type: TrackerActionTypes.CLEAR_ITEM_FROM_LIST_START
+        type: TrackerActionTypes.CLEAR_ITEM_FROM_LIST_START,
+        payload: date
     };
 }
-export const clearItemFromListSuccess = () =>{    
+export const clearItemFromListSuccess = (date) =>{    
     return{
         type: TrackerActionTypes.CLEAR_ITEM_FROM_LIST_SUCCESS,
-        payload: true
+        payload: date
     };
 };
 export const clearItemFromListFailure = error =>{    
@@ -43,17 +38,7 @@ export const clearItemFromListFailure = error =>{
         payload: error
     };
 };
-export const clearItemFromListAsync = (date,user) =>{
-    return async dispatch=>{
-        try{ 
-            await removeTrackerDocument(user,date);                      
-            await dispatch(clearItemFromListSuccess());
-            dispatch(fetchTrackersStartAsync());
-        }catch(error){
-            dispatch(clearItemFromListFailure(error));
-        }
-    };
-}
+
 export const fetchTrackersListStart = ()=>{
     return {
         type: TrackerActionTypes.FETCH_TRACKERS_START
