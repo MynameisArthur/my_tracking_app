@@ -1,8 +1,15 @@
 .categories-switch
     display: flex
     justify-content: space-around
+    flex-wrap: wrap
     span
         cursor: pointer
         font-weight: bold
         &.active
             border-bottom: 2px solid #000
+@media (max-width: 425px)
+    .categories-switch
+        span
+            min-width: 70px
+            text-align: center
+            line-height: 2

@@ -1,6 +1,6 @@
 .tracker-list
     width: 75%
-    margin: 0 auto    
+    margin: 0 auto   
 .tracker-header
     display: grid
     grid-template-columns: repeat(4,1fr) auto
@@ -9,8 +9,22 @@
         font-weight: bold
         text-transform: capitalize
         padding-left: 0
-        
 
+@media (max-width: 768px)
+  .tracker-list
+        width: 96%  
+  .tracker-header
+        grid-template-columns: repeat(4,minmax(1fr,100px)) auto
+        span
+            max-width: 100px
+
+@media (max-width: 425px) 
+    .tracker-header
+        grid-template-columns: repeat(4,minmax(1fr,75px)) auto
+        span
+            max-width: 75px
+        p
+            font-size: 14px
     
         
            

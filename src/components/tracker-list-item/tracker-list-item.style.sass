@@ -7,6 +7,7 @@
   padding: 15px 0 
   font-size: 16px 
   align-items: center  
+  word-wrap: break-word
   & > *
     padding-left: 0
     text-indent: 3px
@@ -17,6 +18,19 @@
     text-align: center
     &:active
       transform: scale(0.90)
+
+@media (max-width: 768px)
+  .tracker-item
+    grid-template-columns: repeat(4,minmax(1fr,100px)) auto
+    & > *
+      padding-left: 2px
+    span
+      max-width: 100px
+@media (max-width: 425px)
+  .tracker-item
+    grid-template-columns: repeat(4,minmax(1fr,75px)) auto
+    span
+      max-width: 75px
     
    
  

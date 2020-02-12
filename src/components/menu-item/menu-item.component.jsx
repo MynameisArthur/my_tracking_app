@@ -11,7 +11,6 @@ const  MenuItem = ({title,imageUrl,history,linkUrl,match}) => {
         <div style={{backgroundImage: `url(${imageUrl})`}}  className="background-image"></div>
         <div className="content">
             <h3 className="title">{title}</h3>
-            <span className="subtitle">tracking</span>
         </div>
     </div>
     );

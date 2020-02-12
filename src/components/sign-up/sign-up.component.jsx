@@ -25,14 +25,7 @@ class SignUp extends Component {
         alert("passwords don't match");
         return;
       }
-      signUpStart({ displayName, email, password });  
-
-        this.setState({
-          displayName: '',
-          email: '',
-          password: '',
-          confirmPassword: ''
-        });     
+      signUpStart({ displayName, email, password });      
     };
   
     handleChange = event => {
