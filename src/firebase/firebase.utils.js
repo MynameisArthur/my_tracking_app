@@ -33,8 +33,7 @@ const config = {
         await userRef.set({
           displayName,
           email,
-          createdAt,
-          isAdmin: false,
+          createdAt,         
           ...additionalData
         });
       }

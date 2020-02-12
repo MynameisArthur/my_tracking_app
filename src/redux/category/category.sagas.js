@@ -1,7 +1,7 @@
 import {takeLatest,put,call,all} from 'redux-saga/effects';
 import CategoryActionTypes from './category.types';
 import {firestore,convertCategoriesSnapshotToMap} from '../../firebase/firebase.utils';
-import {fetchCategoriesStart,fetchCategoriesFailure,fetchCategoriesSuccess} from '../category/category.actions';
+import {fetchCategoriesFailure,fetchCategoriesSuccess} from '../category/category.actions';
 
 export function* fetchCategories()
 {
