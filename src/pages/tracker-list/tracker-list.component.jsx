@@ -12,8 +12,9 @@ class TrackerList extends Component {
     {
         const {fetchTrackersListStart} = this.props;
         fetchTrackersListStart();
-        this.setState({loading: false})
+        this.setState({loading: false});
     }
+   
     render()
     {
         const {trackerItems} = this.props;       

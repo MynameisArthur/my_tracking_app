@@ -5,12 +5,12 @@ import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import {signOutStart} from '../../redux/user/user.actions';
-
+import {ReactComponent as Logo} from '../../assets/icon.svg';
 
 const Header = ({currentUser,hidden,signOutStart}) =>{
     return (
         <div className="header">
-            <Link to="/" className="logo-container"><h1 className="logo">T</h1></Link>
+            <Link to="/" className="logo-container"><Logo className="logo_icon"/></Link>
             <div className="options">
                 <Link to="/tracker" className="option">
                     ADD TRACKER
