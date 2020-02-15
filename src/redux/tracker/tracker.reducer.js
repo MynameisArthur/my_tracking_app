@@ -1,11 +1,9 @@
 import TrackerActionTypes from './tracker.types';
+import UserActionTypes from '../user/user.types';
 const INITIAL_STATE = {
-    hidden: true,
-    isFetching: false,
+    hidden: true,    
     trackerItems: [],
-    errorMessage: undefined,
-    addedTracker: false,
-    removedTracker: false
+    errorMessage: undefined    
 };
 
 const trackerReducer = (state=INITIAL_STATE,action)=>{
@@ -52,7 +50,13 @@ const trackerReducer = (state=INITIAL_STATE,action)=>{
             return {
                 ...state,
                 errorMessage: action.payload
-            };       
+            }; 
+        case UserActionTypes.SIGN_OUT_SUCCESS:   
+        return {
+            ...state,
+            trackerItems: [],
+            errorMessage: undefined
+        }   
         default:
             return state;
     }

@@ -13,14 +13,22 @@ import {
 
 export function* fetchTrackersAsync()
 {
-    try{
-        const trackersRef = firestore.collection('trackers');   
-        const snapshot = yield trackersRef.orderBy('date','desc').get();
-        const trackersMap = yield call(trackersList,snapshot);
-        yield put(fetchTrackersSuccess(trackersMap));
-    }catch(error)
-    {
-        yield put(fetchTrackersFailure(error.message));        
+    const user = yield select(selectCurrentUser);        
+    if(user){
+        const uid = user.id;
+        try{
+            const trackersRef = firestore
+            .collection('trackers')
+            .where('userId','==',uid)
+            .orderBy('date','desc')
+            .get();   
+            const snapshot = yield trackersRef;
+            const trackersMap = yield call(trackersRef,snapshot);                      
+            yield put(fetchTrackersSuccess(trackersMap));
+        }catch(error)
+        {
+            yield put(fetchTrackersFailure(error.message));        
+        }
     }
 }
 
